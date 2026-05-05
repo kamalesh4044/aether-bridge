@@ -71,6 +71,18 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ["command"],
         },
       },
+      {
+        name: "analyze_binary",
+        description: "Perform deep analysis on a binary file to find strings and syscall patterns.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            path: { type: "string", description: "Path to the binary file" },
+            minStringLength: { type: "number", description: "Minimum length of strings to find" },
+          },
+          required: ["path"],
+        },
+      },
     ],
   };
 });
@@ -88,6 +100,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         totalMemory: `${(os.totalmem() / 1e9).toFixed(2)} GB`,
         freeMemory: `${(os.freemem() / 1e9).toFixed(2)} GB`,
         uptime: `${(os.uptime() / 3600).toFixed(2)} hours`,
+        loadAvg: os.loadavg(),
       };
       return {
         content: [{ type: "text", text: JSON.stringify(stats, null, 2) }],
@@ -116,6 +129,38 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       return {
         content: [
           { type: "text", text: `Output:\n${stdout}${stderr ? `\nErrors:\n${stderr}` : ""}` },
+        ],
+      };
+    }
+
+    if (name === "analyze_binary") {
+      const { path, minStringLength = 4 } = z.object({ 
+        path: z.string(), 
+        minStringLength: z.number().optional() 
+      }).parse(args);
+      
+      const buffer = await fs.readFile(path);
+      let strings = [];
+      let currentString = "";
+      
+      for (let i = 0; i < buffer.length; i++) {
+        const charCode = buffer[i];
+        if (charCode >= 32 && charCode <= 126) {
+          currentString += String.fromCharCode(charCode);
+        } else {
+          if (currentString.length >= minStringLength) {
+            strings.push(currentString);
+          }
+          currentString = "";
+        }
+      }
+
+      return {
+        content: [
+          { 
+            type: "text", 
+            text: `Analysis Complete.\nFound ${strings.length} strings.\n\nFirst 50 strings:\n${strings.slice(0, 50).join('\n')}` 
+          }
         ],
       };
     }

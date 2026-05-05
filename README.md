@@ -1,63 +1,96 @@
-# 🌌 Aether-Bridge: The AI-to-System Nexus
+<div align="center">
 
-**Aether-Bridge** is a high-performance, professional-grade implementation of the **Model Context Protocol (MCP)**. It provides a secure, bidirectional bridge between Large Language Models (LLMs) and local operating systems.
+# 🌌 Aether-Bridge
+### The AI-to-System Autonomous Nexus
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![MCP Version](https://img.shields.io/badge/MCP-1.0.0-purple.svg)](https://modelcontextprotocol.io)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
+
+**Aether-Bridge** is a high-performance, industrial-grade implementation of the **Model Context Protocol (MCP)**. It acts as a secure, bidirectional bridge, giving AI models "hands" to interact with local operating systems, file systems, and security tools.
+
+[Explore Walkthrough](#-technical-architecture) • [View Features](#-key-capabilities) • [Quick Start](#-getting-started)
+
+</div>
 
 ---
 
-## 🚀 Key Features
+## 🚀 Key Capabilities
 
-- **🛡️ Secure Handshake**: Full implementation of the MCP Stdio transport layer.
-- **⚡ System Scout**: Real-time telemetry (CPU, RAM, OS Specs) for the AI model.
-- **📂 Deep Explorer**: Full file-system access (List/Read) with path validation.
-- **💻 God-Mode Shell**: Secure execution of PowerShell/Bash commands directly from AI prompts.
-- **🏗️ Industrial Architecture**: Built with TypeScript, Zod validation, and asynchronous processing.
+| Feature | Description | Professional Use Case |
+| :--- | :--- | :--- |
+| **🛡️ Secure Handshake** | Full Stdio transport layer implementation. | Enterprise AI Integration |
+| **🔍 Binary Analyst** | Deep-scan for strings & syscall patterns. | Malware Analysis & RE |
+| **📂 Deep Explorer** | Recursive file-system access with Zod validation. | Data Science & Organization |
+| **💻 God-Mode Shell** | Real-time PowerShell/Bash execution. | DevOps & System Admin |
+| **⚡ System Scout** | Real-time hardware & telemetry metrics. | Infrastructure Monitoring |
+
+---
+
+## 📐 Technical Architecture
+
+<details>
+<summary><b>View Internal System Design</b></summary>
+
+The Aether-Bridge server operates on a non-blocking, asynchronous event loop, ensuring minimal latency between AI prompts and system actions.
+
+```mermaid
+graph LR
+    A[AI Agent / Claude] -- JSON-RPC over Stdio --> B(Aether-Bridge Node.js)
+    B -- Zod Schema Validation --> C{Security Firewall}
+    C -- Authorized --> D[System Interface]
+    D -- Binary/Shell Output --> B
+    B -- Context-Rich Response --> A
+```
+</details>
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Language**: TypeScript
-- **Runtime**: Node.js
-- **Protocol**: Model Context Protocol (MCP) SDK
-- **Validation**: Zod (Schema-first validation)
+<div align="center">
 
----
+| Core | Security | Runtime |
+| :---: | :---: | :---: |
+| TypeScript 5.4 | Zod Validation | Node.js 20+ |
+| MCP SDK | Path Sanitization | ESM Modules |
 
-## 📐 Architecture Diagram
-
-```mermaid
-graph LR
-    A[AI Model / Claude] -- MCP Request --> B(Aether-Bridge Server)
-    B -- Tool Call --> C{Security Gate}
-    C -- Validated --> D[Local System / Shell]
-    D -- Result --> B
-    B -- Response --> A
-```
+</div>
 
 ---
 
 ## 🏃 Getting Started
 
-### Prerequisites
-- Node.js (v18+)
-- TypeScript installed globally (`npm install -g typescript`)
+<details>
+<summary><b>Step-by-Step Installation</b></summary>
 
-### Installation
-1. Clone the repository:
+1. **Clone & Enter**
    ```bash
-   git clone https://github.com/your-username/aether-bridge.git
-   cd aether-bridge
+   git clone https://github.com/kamalesh4044/aether-bridge.git && cd aether-bridge
    ```
-2. Install dependencies:
+2. **Initialize Environment**
    ```bash
-   npm install
+   npm install && npm run build
    ```
-3. Build the project:
-   ```bash
-   npm run build
+3. **Connect to Client**
+   Add this to your `claude_desktop_config.json`:
+   ```json
+   {
+     "mcpServers": {
+       "aether-bridge": {
+         "command": "node",
+         "args": ["C:/path/to/aether-bridge/build/index.js"]
+       }
+     }
+   }
    ```
+</details>
 
 ---
 
-## 👤 Author
-**Kamal** - *Systems & AI Developer*
+<div align="center">
+
+### Developed with 🖤 by [Kamal](https://github.com/kamalesh4044)
+*Part of the Elite Engineering Series*
+
+</div>
